@@ -13,15 +13,15 @@ function OverallRevenue() {
   return (
     <Card className={'border-zinc-200 p-6 dark:border-zinc-800 w-full'}>
       <div className="flex items-center gap-3">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full border border-zinc-200 text-4xl dark:border-zinc-800 dark:text-white">
+        {/* <div className="flex h-14 w-14 items-center justify-center rounded-full border border-zinc-200 text-4xl dark:border-zinc-800 dark:text-white">
           <HiChartBar className="h-5 w-5" />
-        </div>
+        </div> */}
         <div>
           <h5 className="text-sm font-medium leading-5 text-zinc-950 dark:text-white">
-            Credits usage in the last year
+            Number of API calls in the last year
           </h5>
           <p className="mt-1 text-2xl font-bold leading-6 text-zinc-950 dark:text-white">
-            149,758
+            8,915
           </p>
         </div>
       </div>

@@ -19,7 +19,7 @@ export interface TranslateBody {
 export interface ChatBody {
   inputMessage: string;
   model: OpenAIModel;
-  apiKey?: string | undefined | null;
+  paymentTxHash?: string; // 添加支付交易哈希字段
 }
 export interface TranslateResponse {
   code: string;

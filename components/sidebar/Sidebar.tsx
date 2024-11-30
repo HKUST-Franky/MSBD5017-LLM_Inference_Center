@@ -8,7 +8,7 @@ import {
   renderView
 } from '@/components/scrollbar/Scrollbar';
 import Links from '@/components/sidebar/components/Links';
-import SidebarCard from '@/components/sidebar/components/SidebarCard';
+// import SidebarCard from '@/components/sidebar/components/SidebarCard';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card } from '@/components/ui/card';
 import { IRoute } from '@/types/types';
@@ -68,8 +68,8 @@ function Sidebar(props: SidebarProps) {
                 <div className="me-2 flex h-[40px] w-[40px] items-center justify-center rounded-md bg-zinc-950 text-white dark:bg-white dark:text-zinc-950">
                   <HiBolt className="h-5 w-5" />
                 </div>
-                <h5 className="me-2 text-2xl font-bold leading-5 text-zinc-950 dark:text-white">
-                  Horizon AI
+                <h5 className="me-2 text-xl font-bold leading-5 text-zinc-950 dark:text-white">
+                  LLM Inference
                 </h5>
                 <Badge
                   variant="outline"
@@ -86,13 +86,13 @@ function Sidebar(props: SidebarProps) {
             </div>
             {/* Free Horizon Card    */}
             <div className="mb-9 mt-7">
-              <div className="flex justify-center">
+              {/* <div className="flex justify-center">
                 <SidebarCard />
-              </div>
+              </div> */}
 
               {/* Sidebar profile info */}
               <div className="mt-5 flex w-full items-center rounded-lg border border-zinc-200 p-4 dark:border-zinc-800">
-                <a href="/dashboard/dashboard/settings">
+                <a href="/dashboard/settings">
                   <Avatar className="min-h-10 min-w-10">
                     <AvatarImage src={user?.user_metadata.avatar_url} />
                     <AvatarFallback className="font-bold dark:text-zinc-950">

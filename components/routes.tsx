@@ -27,38 +27,38 @@ export const routes: IRoute[] = [
     collapse: false
   },
   {
+    name: 'Wallet',
+    path: '/dashboard/wallet',
+    icon: (
+      <HiOutlineCurrencyDollar className="-mt-[7px] h-4 w-4 stroke-2 text-inherit" />
+    ),
+    collapse: false,
+  },
+  {
     name: 'Profile Settings',
     path: '/dashboard/settings',
     icon: (
       <HiOutlineCog8Tooth className="-mt-[7px] h-4 w-4 stroke-2 text-inherit" />
     ),
-    collapse: false
-  },
-  {
-    name: 'AI Generator',
-    path: '/dashboard/ai-generator',
-    icon: (
-      <HiOutlineDocumentText className="-mt-[7px] h-4 w-4 stroke-2 text-inherit" />
-    ),
     collapse: false,
-    disabled: true
   },
-  {
-    name: 'AI Assistant',
-    path: '/dashboard/ai-assistant',
-    icon: <HiOutlineUser className="-mt-[7px] h-4 w-4 stroke-2 text-inherit" />,
-    collapse: false,
-    disabled: true
-  },
-  {
-    name: 'Users List',
-    path: '/dashboard/users-list',
-    icon: (
-      <HiOutlineUsers className="-mt-[7px] h-4 w-4 stroke-2 text-inherit" />
-    ),
-    collapse: false,
-    disabled: true
-  },
+
+  // {
+  //   name: 'AI Assistant',
+  //   path: '/dashboard/ai-assistant',
+  //   icon: <HiOutlineUser className="-mt-[7px] h-4 w-4 stroke-2 text-inherit" />,
+  //   collapse: false,
+  //   disabled: true
+  // },
+  // {
+  //   name: 'Users List',
+  //   path: '/dashboard/users-list',
+  //   icon: (
+  //     <HiOutlineUsers className="-mt-[7px] h-4 w-4 stroke-2 text-inherit" />
+  //   ),
+  //   collapse: false,
+  //   disabled: true
+  // },
   {
     name: 'Subscription',
     path: '/dashboard/subscription',
@@ -66,24 +66,24 @@ export const routes: IRoute[] = [
       <HiOutlineCreditCard className="-mt-[7px] h-4 w-4 stroke-2 text-inherit" />
     ),
     collapse: false,
-    disabled: true
+    // disabled: true
   },
-  {
-    name: 'Landing Page',
-    path: '/home',
-    icon: (
-      <HiOutlineDocumentText className="-mt-[7px] h-4 w-4 stroke-2 text-inherit" />
-    ),
-    collapse: false,
-    disabled: true
-  },
-  {
-    name: 'Pricing Page',
-    path: '/pricing',
-    icon: (
-      <HiOutlineCurrencyDollar className="-mt-[7px] h-4 w-4 stroke-2 text-inherit" />
-    ),
-    collapse: false,
-    disabled: true
-  }
+  // {
+  //   name: 'Landing Page',
+  //   path: '/home',
+  //   icon: (
+  //     <HiOutlineDocumentText className="-mt-[7px] h-4 w-4 stroke-2 text-inherit" />
+  //   ),
+  //   collapse: false,
+  //   disabled: true
+  // },
+  // {
+  //   name: 'Pricing Page',
+  //   path: '/pricing',
+  //   icon: (
+  //     <HiOutlineCurrencyDollar className="-mt-[7px] h-4 w-4 stroke-2 text-inherit" />
+  //   ),
+  //   collapse: false,
+  //   disabled: true
+  // }
 ];

@@ -29,13 +29,13 @@ import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 
 type RowObj = {
   checked?: string;
-  email: string;
+  modelname: string;
   provider: string;
   created: string;
-  lastsigned: string;
+  price: string;
   uuid: string;
   menu?: string;
-};
+ };
 
 function CheckTable(props: { tableData: any }) {
   const { tableData } = props;
@@ -67,11 +67,11 @@ function CheckTable(props: { tableData: any }) {
         </div>
       )
     }),
-    columnHelper.accessor('email', {
-      id: 'email',
+    columnHelper.accessor('modelname', {
+      id: 'modelname',
       header: () => (
         <p className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">
-          EMAIL ADDRESS
+          MODEL NAME
         </p>
       ),
       cell: (info) => (
@@ -110,11 +110,11 @@ function CheckTable(props: { tableData: any }) {
         </div>
       )
     }),
-    columnHelper.accessor('lastsigned', {
-      id: 'lastsigned',
+    columnHelper.accessor('price', {
+      id: 'price',
       header: () => (
         <p className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">
-          LAST SIGN IN
+          ETH PRICE
         </p>
       ),
       cell: (info) => (
@@ -127,7 +127,7 @@ function CheckTable(props: { tableData: any }) {
       id: 'uuid',
       header: () => (
         <p className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">
-          USER UID
+          PUBILC WALLET_ADD
         </p>
       ),
       cell: (info) => (

@@ -2,26 +2,25 @@ import SupabaseProvider from './supabase-provider';
 import { PropsWithChildren } from 'react';
 import '@/styles/globals.css';
 import { ThemeProvider } from './theme-provider';
+import { WalletProvider } from '@/contexts/WalletContext';
+import { PaymentProvider } from '@/contexts/PaymentContext';
 
 export const dynamic = 'force-dynamic';
 
 export default function RootLayout({
-  // Layouts must accept a children prop.
-  // This will be populated with nested layouts or pages
   children
 }: PropsWithChildren) {
   return (
     <html lang="en">
       <head>
         <title>
-          Horizon UI Boilerplate - Launch your startup project 10X in a few
-          moments - The best NextJS Boilerplate (This is an example)
+          LLM Inference Platform
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* <!--  Social tags   --> */}
         <meta
           name="keywords"
-          content="Add here your main keywords and separate them with a comma"
+          content="LLM, AI, Inference, Platform, Machine Learning, Decentralized, Model Deployment, AI Infrastructure"
         />
         <meta name="description" content="Add here your website description" />
         {/* <!-- Schema.org markup for Google+ --> */}
@@ -68,12 +67,16 @@ export default function RootLayout({
           content="Add here your website name / title"
         />
         <link rel="canonical" href="https://your-website.com" />
-        <link rel="icon" href="/img/favicon.ico" />
+        <link rel="icon" href="/img/website_icon.jpg" />
       </head>
       <body id={'root'} className="loading bg-white">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <SupabaseProvider>
-            <main id="skip">{children}</main>
+            <WalletProvider>
+              <PaymentProvider>
+                <main id="skip">{children}</main>
+              </PaymentProvider>
+            </WalletProvider>
           </SupabaseProvider>
         </ThemeProvider>
       </body>

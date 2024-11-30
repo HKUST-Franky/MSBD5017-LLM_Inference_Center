@@ -1,143 +1,158 @@
-&nbsp;
-<p align="center">
-  <a href="https://horizon-ui.com/boilerplate-shadcn" target="_blank">
-    <img src="https://i.ibb.co/DGSsjWL/top-boilerplate-shadcn-readme.png" alt="Horizon AI Boilerplate Admin Dashboard NextJS Shadcn UI" width="300px" max-width="400px">
-  </a>
-</p>
+# Project Features Documentation
 
-<p align="center">
-    <a style="color: #09090B; text-decoration: underline;" target="_blank" href="https://horizon-ui.com/boilerplate-shadcn">Website</a> •
-    <a style="color: #09090B; text-decoration: underline;" target="_blank" href="https://horizon-ui.com/docs-boilerplate/shadcn-components/auth-UI">Documentation</a> •
-    <a style="color: #09090B; text-decoration: underline;" target="_blank" href="https://horizon-ui.com/boilerplate-shadcn">PRO Version</a> •
-    <a style="color: #09090B; text-decoration: underline;" target="_blank" href="https://github.com/horizon-ui/shadcn-nextjs-boilerplate">Free Template</a> •
-    <a style="color: #09090B; text-decoration: underline;" target="_blank" href="https://twitter.com/horizon_ui">Twitter</a>
-<p align="center" style="max-width: 500px; margin: auto;">
-  Launch your SaaS startup within a few days with the first Admin Dashboard Shadcn UI NextJS boilerplate. Get started with Horizon AI Boilerplate today!
+## 🚀 Recently Added Features
 
-</p>
+### 1. MetaMask Wallet Integration
+- **Location**: `components/dashboard/wallet/index.tsx`
+- **Context**: `contexts/WalletContext.tsx`
+- **Features**:
+  - Connect/Disconnect MetaMask wallet
+  - Display wallet address
+  - Show ETH balance
+  - Auto reconnect on page refresh
+  - Persistent connection across pages
+  - Dark mode support
+  - Error handling for missing MetaMask
 
-&nbsp;
+### 2. Chat Streaming Implementation
+- **Location**: `utils/streams/chatStream.ts`, `app/api/chatAPI/route.ts`
+- **Features**:
+  - Real-time streaming responses
+  - Markdown formatting support
+  - Continuous conversation history
+  - Session management
+  - Custom system prompts
 
-<p align="center" style="width: 100%;">
-<a style="display:flex; justify-content: center; width: 100%;" href="https://horizon-ui.com/boilerplate-shadcn" target="_blank"><img style="border-radius: 10px; width: 100%;" src="https://i.ibb.co/72bXVwG/horizon-free-boilerplate-shadcn-image-readme-2.png" alt="Horizon AI Boilerplate NextJS Shadcn UI" /></a>
-</p>
+## 📦 Core Components
 
-
-&nbsp;
-
-### Introduction
-
-Horizon AI Boilerplate is the first open-source Admin Dashboard OpenAI ChatGPT AI Template made for Shadcn UI, NextJS, and Tailwind CSS! Start creating outstanding Chat AI SaaS Apps faster.
-
-It comes with over 30+ dark/light frontend individual elements, like buttons, inputs, navbars, nav tabs, cards, or alerts, giving you the freedom of choosing and combining.
-
-### Documentation
-
-Each element is well presented in a very complex documentation. You can read more about the <a href="https://horizon-ui.com/docs-boilerplate/shadcn-components/chat" target="_blank">documentation here.</a>
-
-### Quick Start
-
-Install Horizon ChatGPT AI Template by running either of the following:
-
-- Install NodeJS LTS from [NodeJs Official Page](https://nodejs.org/en/?ref=horizon-documentation) (NOTE: Product only works with LTS version)
-
-<br />
-
-Clone the repository with the following command:
-
-```bash
-git clone https://github.com/horizon-ui/shadcn-nextjs-boilerplate.git
+```typescript
+### Wallet Component
+// components/dashboard/wallet/index.tsx
+- Platform balance display
+- Crypto wallet integration
+- Transaction history
+- Help section
 ```
 
-Run in the terminal this command:
 
+### Wallet Context
+
+```typescript
+// contexts/WalletContext.tsx
+
+- MetaMask connection handling
+- MetaMask connection handling
+- Balance updates
+- Event listeners for account changes
 ```
-npm install
+
+### Chat Stream
+
+```typescript
+// utils/streams/chatStream.ts
+
+- Real-time streaming responses
+- Markdown formatting support
+- Continuous conversation history
+- Session management
+- Custom system prompts
 ```
 
-<br />
+## 🔧 Configuration Required
 
+### Environment Variables
+
+```env
+NEXT_PUBLIC_OPENAI_API_KEY=your_openai_key
+REDIS_URL=your_redis_url
 ```
-npm run init
+
+
+### Dependencies Added
+
+```json
+{
+"dependencies": {
+"eventsource-parser": "latest",
+"@upstash/redis": "latest",
+"endent": "latest"
+}
+}
 ```
 
-<br />
+## 🔄 State Management
+- Wallet state managed through React Context
+- Chat history stored in Redis
+- Client-side state for UI updates
 
-Then run this command to start your local server:
+## 🔒 Security Considerations
+- API key protection
+- Secure wallet connections
+- Rate limiting implementation needed
+- Session management security
 
+## 🚧 Pending Improvements
+1. Implement rate limiting for API calls
+2. Add transaction functionality to wallet
+3. Improve error handling and recovery
+4. Add user preferences storage
+5. Implement chat history cleanup
+6. Add network switching support for wallet
+
+## 📝 Usage Examples
+
+### Connecting Wallet
+
+```typescript
+const { connectWallet, walletAddress } = useWallet();
+// Use connectWallet() to initiate connection
 ```
-npm run dev
+
+### Using Chat Stream
+
+```typescript
+const response = await fetch('/api/chatAPI', {
+method: 'POST',
+body: JSON.stringify({
+    inputMessage,
+    conversationId
+    })
+  });
+// Handle streaming response
 ```
-&nbsp;
 
-### Your API Key is not working?
+## 🔍 Testing
+- Add wallet connection tests
+- Add chat streaming tests
+- Add context provider tests
 
-- Make sure you have an [OpenAI account](https://platform.openai.com/account) and a valid API key to use ChatGPT. We don't sell API keys.
-- Make sure you have your billing info added in [OpenAI Billing page](https://platform.openai.com/account/billing/overview). Without billing info, your API key will not work.
-- The app will connect to the OpenAI API server to check if your API Key is working properly. 
+## 📚 Documentation
+- Component documentation needed
+- API documentation needed
+- State management flow documentation needed
 
+## 🎯 Future Features
+1. Multi-wallet support
+2. Chat export functionality
+3. Advanced transaction history
+4. Custom chat models support
+5. Wallet portfolio tracking
 
-### Figma Version
+## ⚠️ Known Issues
+1. Wallet disconnects on page refresh (fixed)
+2. Chat history memory limitations
+3. Network switching handling needed
 
-Horizon AI Boilerplate is available in Figma format as well! [Check it out here](https://www.figma.com/community/file/1374394029061088369)! 🎨
+## 🤝 Contributing
+- Fork the repository
+- Create feature branch
+- Submit pull request
+- Follow coding standards
 
+## 📄 License
+MIT License
 
-### Example Sections
-
-If you want to get inspiration for your startup project or just show something directly to your clients, you can jump-start your development with our pre-built example sections. You will be able to quickly set up the basic structure for your web project.
-
- View <a href="https://horizon-ui.com/boilerplate-shadcn#pages" target="_blank">example sections here</a>
-
- ---
-
-
-# PRO Version
-
-Unlock a huge amount of components and pages with our PRO version - <a href="https://horizon-ui.com/boilerplate-shadcn#pricing" target="_blank">Learn more</a>
-
-<p align="center" style="width: 100%;">
-<a style="display:flex; justify-content: center; width: 100%;" href="https://horizon-ui.com/boilerplate-shadcn#pricing" target="_blank"><img style="border-radius: 10px; width: 100%;" src="https://i.ibb.co/Q8jNqWJ/horizon-boilerplate-shadcn-image-readme-2.png" alt="Horizon AI Boilerplate NextJS Shadcn UI" /></a>
-</p>
-
-
----
-
-# Reporting Issues
-
-We use GitHub Issues as the official bug tracker for the Horizon UI. Here are
-some advice for our users who want to report an issue:
-
-1. Make sure that you are using the latest version of the Horizon UI Boilerplate. Check the CHANGELOG for your dashboard on our [CHANGE LOG File](https://github.com/horizon-ui/shadcn-nextjs-boilerplate/blob/main/CHANGELOG.md).
-<br />
-
-1. Providing us with reproducible steps for the issue will shorten the time it takes for it to be fixed.
-<br />
-
-
-3. Some issues may be browser-specific, so specifying in what browser you encountered the issue might help.
-
----
-
-# Community
-
-Connect with the community! Feel free to ask questions, report issues, and meet new people who already use Horizon UI!
-
-💬 [Join the #HorizonUI Discord Community!](https://discord.gg/f6tEKFBd4m)
-
-
-### Copyright and license
-
-⭐️ [Copyright 2024 Horizon UI](https://www.horizon-ui.com/?ref=readme-horizon)
-
-📄 [Horizon UI License](https://horizon-ui.notion.site/End-User-License-Agreement-8fb09441ea8c4c08b60c37996195a6d5)
-
-
----
-
-# Credits
-
-Special thanks to the open-source resources that helped us create this awesome boilerplate package, including:
-
-- [Shadcn UI Library](https://ui.shadcn.com/)
-- [NextJS Subscription Payments](https://github.com/vercel/nextjs-subscription-payments)
-- [ChatBot UI by mckaywrigley](https://github.com/mckaywrigley/chatbot-ui)
+## 🙏 Acknowledgments
+- OpenAI API
+- MetaMask
+- Next.js team

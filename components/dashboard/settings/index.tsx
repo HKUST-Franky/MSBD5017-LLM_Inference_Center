@@ -85,9 +85,9 @@ export default function Settings(props: Props) {
   };
 
   const notifications = [
-    { message: 'Your call has been confirmed.', time: '1 hour ago' },
-    { message: 'You have a new message!', time: '1 hour ago' },
-    { message: 'Your subscription is expiring soon!', time: '2 hours ago' }
+    { message: 'Your payment has been confirmed.', time: '1 hour ago' },
+    { message: 'You have a new message!', time: '2 hour ago' },
+    { message: 'LLM Inference Platform has made a new update!', time: '2 hours ago' }
   ];
 
   return (
@@ -117,7 +117,7 @@ export default function Settings(props: Props) {
                 {props.user.user_metadata.full_name}
               </p>
               <p className="text-sm font-medium text-zinc-500 dark:text-zinc-400 md:mt-2 pl-4 md:text-base">
-                CEO and Founder
+                LLM Inference Platform Engineer
               </p>
             </div>
           </Card>

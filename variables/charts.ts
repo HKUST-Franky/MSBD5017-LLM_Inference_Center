@@ -297,8 +297,8 @@ export const lineChartOptionsUsage = {
 
 export const lineChartDataMain = [
  {
-  name: 'Revenue',
-  data: [50, 40, 70, 30, 80, 60, 90, 140, 70, 90, 70, 140],
+  name: 'API Calls',
+  data: [523, 412, 756, 345, 867, 634, 912, 998, 734, 945, 789, 1000],
  }, 
 ];
 
@@ -341,7 +341,7 @@ export const lineChartOptionsMain = {
   type: 'line',
  },
  xaxis: {
-  categories: ['SEP', 'OCT', 'NOV', 'DEC', 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG'],
+  categories: ['NOV', 'DEC', 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT',],
   labels: {
    style: {
     colors: '#71717A',

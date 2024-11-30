@@ -10,14 +10,15 @@ import {
   AccordionTrigger
 } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
-import Bgdark from '@/public/img/dark/ai-chat/bg-image.png';
-import Bg from '@/public/img/light/ai-chat/bg-image.png';
+import Bgdark from '@/public/img/dark/ai-chat/chatbot_light.png';
+import Bg from '@/public/img/light/ai-chat/chatbot_12487666.png';
 import { ChatBody, OpenAIModel } from '@/types/types';
 import { User } from '@supabase/supabase-js';
 import { useTheme } from 'next-themes';
 import { useState } from 'react';
 import { HiUser, HiSparkles, HiMiniPencilSquare } from 'react-icons/hi2';
 import { Input } from '@/components/ui/input';
+import { usePayment } from '@/contexts/PaymentContext';
 
 interface Props {
   user: User | null | undefined;
@@ -25,6 +26,7 @@ interface Props {
 }
 export default function Chat(props: Props) {
   const { theme, setTheme } = useTheme();
+  const { processPayment, isProcessing } = usePayment();
   // *** If you use .env.local variable for your API key, method which we recommend, use the apiKey variable commented below
   // Input States
   const [inputOnSubmit, setInputOnSubmit] = useState<string>('');
@@ -38,71 +40,85 @@ export default function Chat(props: Props) {
 
   // API Key
   const handleTranslate = async () => {
-    setInputOnSubmit(inputMessage);
-
-    // Chat post conditions(maximum number of characters, valid message etc.)
-    const maxCodeLength = model === 'gpt-3.5-turbo' ? 700 : 700;
-
-    if (!inputMessage) {
-      alert('Please enter your subject.');
-      return;
-    }
-
-    if (inputMessage.length > maxCodeLength) {
-      alert(
-        `Please enter code less than ${maxCodeLength} characters. You are currently at ${inputMessage.length} characters.`
-      );
-      return;
-    }
-    setOutputCode(' ');
-    setLoading(true);
-    const controller = new AbortController();
-    const body: ChatBody = {
-      inputMessage,
-      model
-    };
-
-    // -------------- Fetch --------------
-    const response = await fetch('/api/chatAPI', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      signal: controller.signal,
-      body: JSON.stringify(body)
-    });
-
-    if (!response.ok) {
-      setLoading(false);
-      if (response) {
-        alert(
-          'Something went wrong went fetching from the API. Make sure to use a valid API key.'
-        );
+    try {
+      // 1. 首先处理支付
+      const paymentSuccess = await processPayment();
+      if (!paymentSuccess) {
+        alert('支付失败，请重试');
+        return;
       }
-      return;
-    }
 
-    const data = response.body;
+      setInputOnSubmit(inputMessage);
 
-    if (!data) {
-      setLoading(false);
-      alert('Something went wrong');
-      return;
-    }
+      // Chat post conditions(maximum number of characters, valid message etc.)
+      const maxCodeLength = model === 'gpt-3.5-turbo' ? 700 : 700;
 
-    const reader = data.getReader();
-    const decoder = new TextDecoder();
-    let done = false;
+      if (!inputMessage) {
+        alert('Please enter your subject.');
+        return;
+      }
 
-    while (!done) {
+      if (inputMessage.length > maxCodeLength) {
+        alert(
+          `Please enter code less than ${maxCodeLength} characters. You are currently at ${inputMessage.length} characters.`
+        );
+        return;
+      }
+      setOutputCode(' ');
       setLoading(true);
-      const { value, done: doneReading } = await reader.read();
-      done = doneReading;
-      const chunkValue = decoder.decode(value);
-      setOutputCode((prevCode) => prevCode + chunkValue);
-    }
+      const controller = new AbortController();
+      const body: ChatBody = {
+        inputMessage,
+        model,
+        paymentTxHash: paymentSuccess
+      };
 
-    setLoading(false);
+      // -------------- Fetch --------------
+      const response = await fetch('/api/chatAPI', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        signal: controller.signal,
+        body: JSON.stringify(body)
+      });
+
+      if (!response.ok) {
+        setLoading(false);
+        if (response) {
+          alert(
+            'This model is not available right now. Please try again later.'
+          );
+        }
+        return;
+      }
+
+      const data = response.body;
+
+      if (!data) {
+        setLoading(false);
+        alert('Something went wrong');
+        return;
+      }
+
+      const reader = data.getReader();
+      const decoder = new TextDecoder();
+      let done = false;
+
+      while (!done) {
+        setLoading(true);
+        const { value, done: doneReading } = await reader.read();
+        done = doneReading;
+        const chunkValue = decoder.decode(value);
+        setOutputCode((prevCode) => prevCode + chunkValue);
+      }
+
+      setLoading(false);
+    } catch (error) {
+      console.error('Error:', error);
+      setLoading(false);
+      alert('发生错误，请重试');
+    }
   };
   // -------------- Copy Response --------------
   // const copyToClipboard = (text: string) => {
@@ -140,32 +156,56 @@ export default function Chat(props: Props) {
               outputCode ? 'mb-5' : 'mb-auto'
             }`}
           >
-            <div className="z-[2] mx-auto mb-5 flex w-max rounded-lg bg-zinc-100 p-1 dark:bg-zinc-800">
+            <div className="z-[2] mx-auto mb-5 flex w-max flex-wrap justify-center gap-2 rounded-lg bg-zinc-100 p-1 dark:bg-zinc-800">
               <div
                 className={`flex cursor-pointer items-center justify-center py-2 transition-all duration-75 ${
                   model === 'gpt-3.5-turbo'
                     ? 'bg-white dark:bg-zinc-950'
                     : 'transparent'
-                } h-[70xp] w-[174px]
-       ${
-         model === 'gpt-3.5-turbo' ? '' : ''
-       } rounded-lg text-base font-semibold text-zinc-950 dark:text-white`}
+                } h-[70xp] w-[150px] rounded-lg text-base font-semibold text-zinc-950 dark:text-white`}
                 onClick={() => setModel('gpt-3.5-turbo')}
               >
-                GPT-3.5
+                GPT-3.5-Turbo
               </div>
               <div
                 className={`flex cursor-pointer items-center justify-center py-2 transition-colors duration-75 ${
                   model === 'gpt-4-1106-preview'
                     ? 'bg-white dark:bg-zinc-950'
                     : 'transparent'
-                } h-[70xp] w-[174px]
-       ${
-         model === 'gpt-4-1106-preview' ? '' : ''
-       } rounded-lg text-base font-semibold text-zinc-950 dark:text-white`}
+                } h-[70xp] w-[150px] rounded-lg text-base font-semibold text-zinc-950 dark:text-white`}
                 onClick={() => setModel('gpt-4-1106-preview')}
               >
-                GPT-4
+                GPT-4o
+              </div>
+              <div
+                className={`flex cursor-pointer items-center justify-center py-2 transition-colors duration-75 ${
+                  model === 'claude-2'
+                    ? 'bg-white dark:bg-zinc-950'
+                    : 'transparent'
+                } h-[70xp] w-[150px] rounded-lg text-base font-semibold text-zinc-950 dark:text-white`}
+                onClick={() => setModel('claude-2')}
+              >
+                Claude-3.5-Sonnet
+              </div>
+              <div
+                className={`flex cursor-pointer items-center justify-center py-2 transition-colors duration-75 ${
+                  model === 'palm-2'
+                    ? 'bg-white dark:bg-zinc-950'
+                    : 'transparent'
+                } h-[70xp] w-[150px] rounded-lg text-base font-semibold text-zinc-950 dark:text-white`}
+                onClick={() => setModel('palm-2')}
+              >
+                Qwen-2.5-7B
+              </div>
+              <div
+                className={`flex cursor-pointer items-center justify-center py-2 transition-colors duration-75 ${
+                  model === 'llama-2'
+                    ? 'bg-white dark:bg-zinc-950'
+                    : 'transparent'
+                } h-[70xp] w-[150px] rounded-lg text-base font-semibold text-zinc-950 dark:text-white`}
+                onClick={() => setModel('llama-2')}
+              >
+                LLaMA-3.1-70B
               </div>
             </div>
 
@@ -177,7 +217,7 @@ export default function Chat(props: Props) {
                 <AccordionTrigger className="dark:text-white">
                   <div className="text-center">
                     <p className="text-sm font-medium text-zinc-950 dark:text-zinc-400">
-                      No plugins added
+                      No External Plugins Added
                     </p>
                   </div>
                 </AccordionTrigger>
@@ -234,7 +274,7 @@ export default function Chat(props: Props) {
 
           <div className="mt-5 flex flex-col items-center justify-center md:flex-row">
             <p className="text-center text-xs text-zinc-500 dark:text-white">
-              Free Research Preview. ChatGPT may produce inaccurate information
+              LLMs may produce inaccurate information
               about people, places, or facts. Consider checking important
               information.
             </p>

@@ -79,7 +79,7 @@ export default function HeaderLinks(props: { [x: string]: any }) {
               Pricing
             </Button>
           </a>
-          <a target="blank" href="mailto:hello@horizon-ui.com">
+          <a target="blank" href="mailto:xhwufung@connect.ust.hk">
             <Button variant="outline" className="mb-2 w-full">
               Help & Support
             </Button>
