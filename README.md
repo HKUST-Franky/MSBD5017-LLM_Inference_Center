@@ -8,7 +8,7 @@
 - **Features**:
   - Connect/Disconnect MetaMask wallet
   - Display wallet address
-  - Show ETH balance
+  - Show LLM Coin balance
   - Auto reconnect on page refresh
   - Persistent connection across pages
   - Dark mode support
@@ -143,16 +143,5 @@ body: JSON.stringify({
 2. Chat history memory limitations
 3. Network switching handling needed
 
-## 🤝 Contributing
-- Fork the repository
-- Create feature branch
-- Submit pull request
-- Follow coding standards
-
 ## 📄 License
 MIT License
-
-## 🙏 Acknowledgments
-- OpenAI API
-- MetaMask
-- Next.js team
