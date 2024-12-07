@@ -1,5 +1,13 @@
 # Project Features Documentation
 
+## How to start the project 
+
+Download the node version of 18, and then run 
+```typescript
+npm install
+npm run test
+```
+
 ## 🚀 Recently Added Features
 
 ### 1. MetaMask Wallet Integration
